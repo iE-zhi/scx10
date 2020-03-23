@@ -1,0 +1,18 @@
+Removed Pin From Net: NetName=steer_5V_O Pin=P3-1
+Removed Pin From Net: NetName=GND Pin=P3-4
+Removed Pin From Net: NetName=GND Pin=P3-5
+Removed Pin From Net: NetName=3.3V Pin=P4-2
+Removed Pin From Net: NetName=5V Pin=P4-3
+Removed Pin From Net: NetName=GND Pin=P4-4
+Removed Pin From Net: NetName=GND Pin=P4-5
+Removed Member From Class: ClassName=power Member=P3
+Removed Member From Class: ClassName=power Member=P4
+Added Pin To Net: NetName=steer_5V_O Pin=C8-2
+Added Pin To Net: NetName=3.3V Pin=C16-2
+Added Pin To Net: NetName=3.3V Pin=C17-2
+Added Pin To Net: NetName=5V Pin=C19-2
+Added Pin To Net: NetName=5V Pin=C20-2
+Added Pin To Net: NetName=steer_5V_O Pin=P2-2
+Added Pin To Net: NetName=3.3V Pin=U5-2
+Added Pin To Net: NetName=5V Pin=U6-2
+Change Net Name : Old Net Name=steer_5V_O New Net Name=steer_5V
