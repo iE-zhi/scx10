@@ -48,7 +48,8 @@ void uart2_init(u32 bound){
 	USART_InitTypeDef USART_InitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
 	 
-	RCC_APB2PeriphClockCmd(RCC_APB1Periph_USART2|RCC_APB2Periph_GPIOA, ENABLE);	//使能USART1，GPIOA时钟
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);	//使能GPIOA时钟
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);	//使能USART2时钟
   
 	//USART2_TX   GPIOA.2
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2; //PA.2
@@ -63,8 +64,8 @@ void uart2_init(u32 bound){
 
   //Usart2 NVIC 配置
   NVIC_InitStructure.NVIC_IRQChannel = USART2_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=3 ;//抢占优先级3
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;		//子优先级3
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=1; //抢占优先级1
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;		//子优先级1
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			//IRQ通道使能
 	NVIC_Init(&NVIC_InitStructure);	//根据指定的参数初始化VIC寄存器
   
@@ -99,6 +100,7 @@ void USART2_IRQHandler(void)                	//串口2中断服务程序
 				{
 					USART_RX_STA|=0x8000;	//接收完成了
 					USART_Cmd(USART2, DISABLE);
+					USART_RX_BUF[USART_RX_STA&0X3FFF] = '\0';
 					para_usart_data();
 					USART_Cmd(USART2, ENABLE);
 					USART_RX_STA = 0;

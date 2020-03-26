@@ -188,7 +188,7 @@ void para_usart_data(void)
 	unsigned short cal_crc = 0;
 	unsigned short rec_crc = 0;
 
-	rec_crc = USART_RX_BUF[USART_RX_STA&0X3FFF-1] << 8 | USART_RX_BUF[USART_RX_STA&0X3FFF-2];
+	rec_crc = (USART_RX_BUF[(USART_RX_STA&0X3FFF)-1] << 8) | USART_RX_BUF[(USART_RX_STA&0X3FFF)-2];
 	cal_crc = CRC16((char*)USART_RX_BUF);
 	if (USART_RX_BUF[0] == '#' && cal_crc == rec_crc)
 	{
