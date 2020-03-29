@@ -14,3 +14,5 @@
 - program: 程序(keil5工程)
 - 资料: 芯片资料
 
+# PCB板尺寸
+![pcb](https://github.com/iE-zhi/scx10/blob/master/pictures/size.png)
