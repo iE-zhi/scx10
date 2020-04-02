@@ -125,7 +125,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
-          <Name>d</Name>
+          <Name></Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -173,7 +173,7 @@
         <Ww>
           <count>3</count>
           <WinNumber>1</WinNumber>
-          <ItemText>\\scx10\Hardware/usart/usart.c\USART_RX_STA,0x0A</ItemText>
+          <ItemText>\\scx10\Hardware/usart/usart.c\USART_RX_STA,0x10</ItemText>
         </Ww>
         <Ww>
           <count>4</count>
