@@ -23,8 +23,8 @@ int main(void)
   
 	//有刷电机PWM初始化
 	TIM3_PWM_Init(7199, 0);      //定时器3用于产生PWM控制有刷电机，PWM频率: 72M/7200 = 10KHz
-	TIM_SetCompare1(TIM3,1599);
-	TIM_SetCompare2(TIM3,5599);
+	TIM_SetCompare1(TIM3,3599);
+	TIM_SetCompare2(TIM3,3599);
 	TIM_Cmd(TIM3, ENABLE);  //使能TIMx外设
 	
 	//使能有刷电机

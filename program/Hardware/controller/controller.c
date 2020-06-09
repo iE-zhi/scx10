@@ -14,8 +14,8 @@
 *
 - 舵机中心微调命令 - 
 | 包头   命令   舵机方向   CRC16低字节   CRC16高字节   结束符
-| 0x23   0xa8   0x58(左)      0x00          0x00        \r\n
-|               0x85(右)
+| 0x23   0xa8   0x85(左)      0x00          0x00        \r\n
+|               0x58(右)
 |               0x88(恢复默认的值 Servo_Value=1499)
 *
 - 舵机中心值保存命令 -
@@ -43,7 +43,7 @@ static void Motor_control(void)
 	float Speed_Value = 0.0;
 	
 	Speed_Value = (float)USART_RX_BUF[3] / 255.0 * 3599 + 0.5;
-	if (Speed_Value == 0)
+	if ((unsigned int)Speed_Value == 0)
 		USART_RX_BUF[2] = 0x88;
 	switch(USART_RX_BUF[2])
 	{
@@ -85,14 +85,14 @@ static void Servo_control(void)
 	float Angle_Value = 0.0;
 	
 	Angle_Value = (float)USART_RX_BUF[5] / 255.0 * 500 + 0.5;
-	if (Angle_Value == 0)
+	if ((unsigned int)Angle_Value == 0)
 		USART_RX_BUF[4] = 0x88;
 	switch(USART_RX_BUF[4])
 	{
-		case 0x58: // 左转
+		case 0x85: // 左转
 			(Servo_Value-(int)Angle_Value >= 999) ? TIM_SetCompare3(TIM4, Servo_Value - (int)Angle_Value) : TIM_SetCompare3(TIM4, 999);
 			break;
-		case 0x85: // 右转
+		case 0x58: // 右转
 			(Servo_Value+(int)Angle_Value <= 1999) ? TIM_SetCompare3(TIM4, Servo_Value + (int)Angle_Value) : TIM_SetCompare3(TIM4, 1999);
 			break;
 		case 0x88: // 中心

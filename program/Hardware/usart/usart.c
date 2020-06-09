@@ -101,10 +101,10 @@ void USART2_IRQHandler(void)                	//串口2中断服务程序
 					USART_RX_STA|=0x8000;	//接收完成了
 					if((USART_RX_STA&0X3FFF) >= 4)
 					{
-						USART_Cmd(USART2, DISABLE);
+						//USART_Cmd(USART2, DISABLE);
 						USART_RX_BUF[USART_RX_STA&0X3FFF] = '\0';
 						para_usart_data();
-						USART_Cmd(USART2, ENABLE);
+						//USART_Cmd(USART2, ENABLE);
 					}
 					USART_RX_STA = 0;
 				}					
