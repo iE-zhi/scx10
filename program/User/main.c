@@ -33,7 +33,7 @@ int main(void)
 	//转向舵机PWM初始化
 	TIM4_PWM_Init(19999, 71);      //定时器4产生50Hz的PWM控制舵机，比较值范围[999,1999]
 	Servo_Value = AT24CXX_ReadLenByte(0x10, sizeof(Servo_Value));      //读取保存在24C02中的值
-	Servo_Value = (Servo_Value >= 999 && Servo_Value <= 1999) ? Servo_Value : 1499;
+	Servo_Value = (Servo_Value >= 1099 && Servo_Value <= 1899) ? Servo_Value : 1499;
 	TIM_SetCompare3(TIM4, Servo_Value);      //TIM4_CH3占空比7.5%,使舵机处于中间位置
 	TIM_Cmd(TIM4, ENABLE);  //使能TIMx外设
 	

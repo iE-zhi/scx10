@@ -84,16 +84,16 @@ static void Servo_control(void)
 {
 	float Angle_Value = 0.0;
 	
-	Angle_Value = (float)USART_RX_BUF[5] / 255.0 * 500 + 0.5;
+	Angle_Value = (float)USART_RX_BUF[5] / 255.0 * 400 + 0.5;
 	if ((unsigned int)Angle_Value == 0)
 		USART_RX_BUF[4] = 0x88;
 	switch(USART_RX_BUF[4])
 	{
 		case 0x85: // 左转
-			(Servo_Value-(int)Angle_Value >= 999) ? TIM_SetCompare3(TIM4, Servo_Value - (int)Angle_Value) : TIM_SetCompare3(TIM4, 999);
+			(Servo_Value-(int)Angle_Value >= 1099) ? TIM_SetCompare3(TIM4, Servo_Value - (int)Angle_Value) : TIM_SetCompare3(TIM4, 1099);
 			break;
 		case 0x58: // 右转
-			(Servo_Value+(int)Angle_Value <= 1999) ? TIM_SetCompare3(TIM4, Servo_Value + (int)Angle_Value) : TIM_SetCompare3(TIM4, 1999);
+			(Servo_Value+(int)Angle_Value <= 1899) ? TIM_SetCompare3(TIM4, Servo_Value + (int)Angle_Value) : TIM_SetCompare3(TIM4, 1899);
 			break;
 		case 0x88: // 中心
 			TIM_SetCompare3(TIM4, Servo_Value);
@@ -148,14 +148,14 @@ static void Servo_FineTuning(void)
 	switch(USART_RX_BUF[2])
 	{
 		case 0x58: //向左微调
-			if (Servo_Value > 999)
+			if (Servo_Value > 1099)
 			{
 				Servo_Value--;
 				TIM_SetCompare3(TIM4, Servo_Value);
 			}
 			break;
 		case 0x85: //向右微调
-			if (Servo_Value < 1999)
+			if (Servo_Value < 1899)
 			{
 				Servo_Value++;
 				TIM_SetCompare3(TIM4, Servo_Value);
